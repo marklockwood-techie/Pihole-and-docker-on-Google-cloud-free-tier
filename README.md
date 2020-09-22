@@ -2,12 +2,8 @@
 
 # Set up firewall
 Go to VCP Network - Firewall
-Create a rule "allow-docker"
-  - Targets - Apply to all
-  - Source - 0.0.0.0/0
-  - Protocol - TCP:12345
   
-Create a rule "local-security-group"
+Create a rule "local-security-group" - This will only allow browsers from your local LAN access to the services
   - Targets - Apply to all
   - Source - [LOCAL WAN IP]/32
   - Protocol  - TCP:53,80,443,9000,2375
@@ -67,7 +63,7 @@ Go to Compute Engine - VM instances
   sudo usermod -aG docker $USER
   logout
 
-# Intall Portainer - https://medium.com/google-cloud/google-container-registry-and-portainer-57198bdae070
+# Install Portainer - https://medium.com/google-cloud/google-container-registry-and-portainer-57198bdae070
   docker run \
   --detach \
   --publish=9000:9000 \
@@ -75,9 +71,12 @@ Go to Compute Engine - VM instances
   --volume=portainer_data:/data \
   portainer/portainer
   
+You can now access Portainer from your LAN using http://[VM external IP]:9000
+  
 # Install pihole into Docker using Portainer
   https://homenetworkguy.com/how-to/install-pihole-on-raspberry-pi-with-docker-and-portainer/
 
+You can now admin your pihole using http://[VM external IP]/admin
 
 # Use Pihole on your LAN
   Change the DNS on your router to be your Goolge Cloud VM IP
