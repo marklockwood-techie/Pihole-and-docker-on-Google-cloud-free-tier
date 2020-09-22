@@ -23,7 +23,7 @@ Go to Compute Engine - VM instances
   - Change Machine Series to N1 and Type to F1
   - Change the boot disk to 30GB
   - Expand " Management, security, disks, networking, sole tenancy"
-      - Click Netorking
+      - Click Networking
       - Click pen of "Network Interface"
       - Change Exterenal IP to "Create IP address" and use Standard pricing
   - Click Create to build the vm
