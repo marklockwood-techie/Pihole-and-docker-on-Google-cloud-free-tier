@@ -44,7 +44,7 @@ Go to Compute Engine - VM instances
   sudo usermod -aG docker $USER
   logout
 
-# Intall Portainer
+# Intall Portainer - https://medium.com/google-cloud/google-container-registry-and-portainer-57198bdae070
   docker run \
   --detach \
   --publish=9000:9000 \
