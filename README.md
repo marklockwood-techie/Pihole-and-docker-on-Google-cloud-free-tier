@@ -63,6 +63,13 @@ Go to Compute Engine - VM instances
   sudo usermod -aG docker $USER
   logout
 
+# Install Watchtower - Will keep your docker images up to date - https://github.com/containrrr/watchtower
+  docker run -d \
+    --name watchtower \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    containrrr/watchtower
+
+
 # Install Portainer - https://medium.com/google-cloud/google-container-registry-and-portainer-57198bdae070
   docker run \
   --detach \
