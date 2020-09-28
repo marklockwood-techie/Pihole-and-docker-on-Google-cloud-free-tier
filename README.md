@@ -31,15 +31,15 @@ Go to Compute Engine - VM instances
   sudo apt-get update && sudo apt-get upgrade -y && sudo reboot
   
 # Set the VM to automatically update - https://libre-software.net/ubuntu-automatic-updates/
-
-  - sudo apt install unattended-upgrade
+  - sudo apt-get update
   - sudo nano /etc/apt/apt.conf.d/50unattended-upgrades - uncomment the “updates” line by deleting the two slashes at the beginning of it:
-    - "${distro_id}:${distro_codename}-updates";
+    - "origin=Debian,codename=${distro_codename}-updates";
+    
     - uncommenting and adapt the following lines:
-    - Unattended-Upgrade::Remove-Unused-Kernel-Packages "true";
-    - Unattended-Upgrade::Remove-Unused-Dependencies "true"; 
-    - Unattended-Upgrade::Automatic-Reboot "true";
-    - Unattended-Upgrade::Automatic-Reboot-Time "02:38";
+      - Unattended-Upgrade::Remove-Unused-Kernel-Packages "true";
+      - Unattended-Upgrade::Remove-Unused-Dependencies "true"; 
+      - Unattended-Upgrade::Automatic-Reboot "true";
+      - Unattended-Upgrade::Automatic-Reboot-Time "02:38";
   - <ctrl>+o <enter> <ctrl>+x
 
   - sudo nano /etc/apt/apt.conf.d/20auto-upgrades - In most cases, the file will be empty. Copy and paste the following lines:
@@ -70,12 +70,8 @@ Go to Compute Engine - VM instances
 
 
 # Install Portainer - https://medium.com/google-cloud/google-container-registry-and-portainer-57198bdae070
-  - docker run \
-    --detach \
-    --publish=9000:9000 \
-    --volume=/var/run/docker.sock:/var/run/docker.sock \
-    --volume=portainer_data:/data \
-    portainer/portainer
+    - docker volume create portainer_data
+    - docker run -d -p 8000:8000 -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce
   
 You can now access Portainer from your LAN using http://[VM external IP]:9000
   
