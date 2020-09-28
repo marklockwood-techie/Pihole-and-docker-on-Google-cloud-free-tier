@@ -75,8 +75,24 @@ Go to Compute Engine - VM instances
   
 You can now access Portainer from your LAN using http://[VM external IP]:9000
   
-# Install pihole into Docker using Portainer
-  https://homenetworkguy.com/how-to/install-pihole-on-raspberry-pi-with-docker-and-portainer/
+# Install pihole into Docker using Portainer - https://codeopolis.com/posts/running-pi-hole-in-docker-is-remarkably-easy/
+
+  - docker volume create pihole
+  - docker volume create dnsmasq
+  
+  - docker run \
+--name=pihole \
+-e WEBPASSWORD=YOURPASS \
+-e SERVERIP=YOUR.SERVER.IP \
+-e DNS1=DNS1IP \
+-e DNS2=DNS2IP \
+-v pihole:/etc/pihole \
+-v dnsmasq:/etc/dnsmasq.d \
+-p 80:80 \
+-p 53:53/tcp \
+-p 53:53/udp \
+--restart=unless-stopped \
+pihole/pihole
 
 You can now admin your pihole using http://[VM external IP]/admin
 
