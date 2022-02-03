@@ -31,7 +31,7 @@ Go to Compute Engine - VM instances
   sudo apt-get update && sudo apt-get upgrade -y && sudo reboot
   
 # Set the VM to automatically update - https://libre-software.net/ubuntu-automatic-updates/
-  - sudo apt-get update
+  - apt-get install unattended-upgrades
   - sudo nano /etc/apt/apt.conf.d/50unattended-upgrades - uncomment the “updates” line by deleting the two slashes at the beginning of it:
     - "origin=Debian,codename=${distro_codename}-updates";
     
